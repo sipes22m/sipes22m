@@ -64,6 +64,90 @@
   </video>
 <p><i>Too lazy to click on the links in the first section? Good news, I've embedded a video right in this website! Enjoy a horizontally spinning rat for your journey. (Source: "swizzdizzy" on Youtube)</i></p>
 
+<script>
+
+var counter=0;
+var totalQuestions=6;
+
+var myGraduationYear= 2026;
+var myMajor="art history";
+
+//create a list of the majors you are/ were interested in
+var majorInterestedList=["studioart", "psychology", "history", "english" ];
+var favArtistsList=["phoebebridgers", "lucydacus", "talkingheads", "jonimitchell", "queen" ];
+
+var userName;
+
+function displayFeedback(form) {
+
+    counter++;
+
+    var feedbackText="";
+    var newQuestionText="";
+
+    var userInput= form.userInput.value;
+
+    if (counter==1) {        
+        userName= userInput;
+        feedbackText="Hello, "+ userName+" ! " +"<br>Nice to meet you."+
+        " I am Mina, a freshman at Mount Holyoke College.";
+
+        newQuestionText="Do you also attend Mount Holyoke College ?";              
+    }
+
+    if (counter==2) {        
+        feedbackText="Thanks for sharing."; 
+        newQuestionText="What is your major ?";              
+    }
+
+    if (counter==3) {     
+        if (userInput.toLowerCase()== myMajor) feedbackText="Great! I am also majoring in "+ userInput+"."; 
+        
+        else {
+            feedbackText="I guess you must find "+userInput+" very interesting."+" I am majoring in "+myMajor;
+            
+            //check if user's major is one the majors in your majorInterestedList 
+            for (let i = 0; i < majorInterestedList.length; i++) {      
+                if (userInput.toLowerCase() == majorInterestedList[i]) {
+                    feedbackText=userInput+ " was one of the majors I was interested to pursue."+
+                    " I am now majoring in "+myMajor+".";
+                }    
+            }
+    }
+
+    newQuestionText="When are you graduating ?"; 
+    }
+
+    if (counter==4) {     
+        if (userInput== myGraduationYear) feedbackText="I am also graduating the same year ! ";  
+        else if (userInput< myGraduationYear) feedbackText="Nice. You will be graduating earlier than me."; 
+        else if (userInput> myGraduationYear) feedbackText="Nice. I will be graduating in "+ myGraduationYear+", a bit later than you.";
+        else feedbackText="Thanks for sharing.";  
+        newQuestionText="Who is your favorite singer or band?";
+    }
+
+    if (counter==5) {
+        for (let i = 0; i < favArtistsList.length; i++) {
+            if (userInput.toLowerCase() == favArtistsList[i]) {
+                feedbackText=userInput+" is really cool! I like them too.";
+            
+            }
+            else  feedbackText="Thanks for sharing.";
+        }
+    }
+    
+    //if you have reached the last question
+    if (counter>=totalQuestions ) {
+        feedbackText=feedbackText+"<br><br>It was nice talking to you, "+userName+"."+
+        "<br>I hope you have a great day!";           
+    }
+  
+    //update the feedback and clear the input box
+    document.getElementById("botSays").innerHTML = feedbackText+ "<br><br>"+newQuestionText;   
+    form.userInput.value=""; 
+}
+
+</script>
 
 <form>
     <label for="thoughts">What did you think of my website?</label><br>
